@@ -9,7 +9,12 @@ public class AdministratorController {
 
   @RequestMapping("/")
   public String index() {
-    return "administrator/login.html";
+    return "administrator/login";
+  }
+
+  @RequestMapping("/toInsert")
+  public String toInsert() {
+    return "administrator/insert";
   }
 
 }
