@@ -29,21 +29,21 @@
           <!-- ここから上を編集する必要はありません -->
 
           <!-- ここにモックのform要素を貼り付けます -->
-          <form method="post" action="../employee/list.html">
+          <form method="post" th:action="@{/login}" th:object="${loginForm}">
             <fieldset>
               <legend>ログイン</legend>
-              <div class="form-group">
+              <div th:if="${isFailed}" class="form-group">
                 <div class="alert alert-danger">
                   <p>メールアドレスまたはパスワードが間違っています</p>
                 </div>
               </div>
               <div class="form-group">
-                <label for="mailAddress">メールアドレス:</label> <input type="text" name="mailAddress" id="mailAddress"
-                  class="form-control" placeholder="Email">
+                <label for="mailAddress">メールアドレス:</label>
+                <input type="text" th:field="*{mailAddress}" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
-                <label for="inputPassword">パスワード:</label> <input type="password" name="password" id="inputPassword"
-                  class="form-control" placeholder="Password">
+                <label for="inputPassword">パスワード:</label>
+                <input type="password" th:field="*{password}" id="inputPassword" class="form-control" placeholder="Password">
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">ログイン</button>

@@ -1,5 +1,6 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,25 +8,58 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
 
+  /** 管理者の業務処理を行うクラス */
   @Autowired
   private AdministratorService administratorService;
 
+  /** セッションにデータを保存するオブジェクト */
+  @Autowired
+  private HttpSession session;
+
   /**
+   * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者ログイン画面
    */
   @RequestMapping("/")
-  public String index() {
+  public String toLogin(Model model) {
+    model.addAttribute(new LoginForm());
+    model.addAttribute("isFailed", false);
     return "administrator/login";
   }
 
   /**
-   * @param model モデル
+   * 管理者のログイン処理を行う.
+   *
+   * @param form 受け取ったログイン情報
+   * @param model ビューに渡すデータを保存するオブジェクト
+   * @return 従業員一覧へリダイレクト
+   */
+  @RequestMapping("/login")
+  public String login(LoginForm form, Model model) {
+    String mailAddress = form.getMailAddress();
+    String password = form.getPassword();
+    Administrator administrator = administratorService.login(mailAddress, password);
+
+    if (administrator == null) {
+      model.addAttribute(form);
+      model.addAttribute("isFailed", true);
+      return "administrator/login";
+    } else {
+      session.setAttribute("administratorName", administrator.getName());
+      return "redirect:/employee/showList";
+    }
+  }
+
+
+  /**
+   * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者登録画面
    */
   @RequestMapping("/toInsert")
@@ -35,7 +69,7 @@ public class AdministratorController {
   }
 
   /**
-   * 管理者情報を登録する
+   * 管理者情報を登録する.
    *
    * @param form 登録する管理者情報
    * @return 管理者ログイン画面へリダイレクト
@@ -47,5 +81,4 @@ public class AdministratorController {
     administratorService.insert(administrator);
     return "redirect:/";
   }
-
 }
