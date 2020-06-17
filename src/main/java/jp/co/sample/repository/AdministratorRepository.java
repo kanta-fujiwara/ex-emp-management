@@ -44,8 +44,8 @@ public class AdministratorRepository {
   /**
    * メールアドレスとパスワードから管理者情報を検索する.
    *
-   * @param mailAddress
-   * @param password
+   * @param mailAddress メールアドレス
+   * @param password パスワード
    *
    * @return メールアドレスとパスワードが一致する管理者情報。該当情報がない場合はnull。
    */

@@ -1,8 +1,16 @@
 package jp.co.sample.form;
 
+/**
+ * /insert で受け取るフォームデータ.
+ *
+ * @author kanta.fujiwara
+ */
 public class InsertAdministratorForm {
+  /** 名前 */
   private String name;
+  /** メールアドレス */
   private String mailAddress;
+  /** パスワード */
   private String password;
 
   public InsertAdministratorForm() {}
