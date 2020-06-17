@@ -26,4 +26,14 @@ public class EmployeeService {
   public List<Employee> showList() {
     return employeeRepository.findAll();
   }
+
+  /**
+   * 従業員情報を取得する.
+   *
+   * @param id 対象のID
+   * @return id が一致する従業員情報。存在しない場合は例外が発生する。
+   */
+  public Employee showDetail(Integer id) {
+    return employeeRepository.load(id);
+  }
 }

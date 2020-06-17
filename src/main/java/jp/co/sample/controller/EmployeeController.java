@@ -29,13 +29,37 @@ public class EmployeeController {
    * 従業員一覧を表示する.
    *
    * @param model ビューに渡すデータを保存するオブジェクト
-   * @return 従業員一覧画面
+   * @return 従業員一覧画面。ログインしていない場合はログイン画面へリダイレクト。
    */
   @RequestMapping("/showList")
   public String showList(Model model) {
+    // ログイン情報の確認
+    if (session.getAttribute("administratorName") == null) {
+      return "redirect:/";
+    }
+
     List<Employee> employeeList = employeeService.showList();
     model.addAttribute("employeeList", employeeList);
     return "employee/list";
+  }
+
+  /**
+   * 従業員の詳細ページを表示する.
+   *
+   * @param id 表示する従業員のID
+   * @param model ビューに渡すデータを保存するオブジェクト
+   * @return 従業員の詳細ページ。 ログインしていない場合はログイン画面へリダイレクト。
+   */
+  @RequestMapping("/showDetail")
+  public String showDetail(Integer id, Model model) {
+    // ログイン情報の確認
+    if (session.getAttribute("administratorName") == null) {
+      return "redirect:/";
+    }
+
+    Employee employee = employeeService.showDetail(id);
+    model.addAttribute("employee", employee);
+    return "employee/detail";
   }
 
 }
