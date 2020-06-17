@@ -6,6 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.repository.AdministratorRepository;
 
+/**
+ * 管理者情報を操作するサービス.
+ *
+ * @author kanta.fujiwara
+ *
+ */
 @Service
 @Transactional
 public class AdministratorService {

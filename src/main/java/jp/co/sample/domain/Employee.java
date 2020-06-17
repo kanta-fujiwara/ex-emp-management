@@ -3,7 +3,7 @@ package jp.co.sample.domain;
 import java.util.Date;
 
 /**
- * 従業員を表すドメインクラス.
+ * 従業員情報を表すドメインクラス.
  *
  * @author kanta.fujiwara
  */

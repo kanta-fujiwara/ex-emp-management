@@ -11,6 +11,11 @@ import jp.co.sample.form.InsertAdministratorForm;
 import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
+/**
+ * 管理者情報を操作するコントローラ.
+ *
+ * @author kanta.fujiwara
+ */
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
@@ -24,6 +29,8 @@ public class AdministratorController {
   private HttpSession session;
 
   /**
+   * ログイン画面を表示する.
+   *
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者ログイン画面
    */
@@ -59,6 +66,8 @@ public class AdministratorController {
 
 
   /**
+   * 管理者登録画面に遷移する.
+   *
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者登録画面
    */

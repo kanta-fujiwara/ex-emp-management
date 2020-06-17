@@ -1,7 +1,7 @@
 package jp.co.sample.domain;
 
 /**
- * 管理者を表すドメインクラス.
+ * 管理者情報を表すドメインクラス.
  *
  * @author kanta.fujiwara
  */
