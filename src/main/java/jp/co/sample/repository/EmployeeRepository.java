@@ -13,7 +13,7 @@ import jp.co.sample.domain.Employee;
 
 /**
  * employeesテーブルを操作するリポジトリ.
- * 
+ *
  * @author kanta.fujiwara
  */
 @Repository
@@ -23,7 +23,8 @@ public class EmployeeRepository {
 
   private static final String TABLE_NAME = "employees";
 
-  private static final RowMapper<Employee> ROW_MAPPER = new BeanPropertyRowMapper<Employee>();
+  private static final RowMapper<Employee> ROW_MAPPER =
+      new BeanPropertyRowMapper<Employee>(Employee.class);
 
   /**
    * 従業員情報を全件取得する.
@@ -34,7 +35,7 @@ public class EmployeeRepository {
     String sql = ""
         + "SELECT id, name, image, gender, hire_date, mail_address, zip_code, "
         + "  address, telephone, salary, characteristics, dependents_count"
-        + "    FROM " + TABLE_NAME + "　ORDER BY hire_date DESC;";
+        + "    FROM " + TABLE_NAME + " ORDER BY hire_date DESC;";
 
     return template.query(sql, ROW_MAPPER);
   }
