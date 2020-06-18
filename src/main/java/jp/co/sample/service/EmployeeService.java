@@ -36,4 +36,13 @@ public class EmployeeService {
   public Employee showDetail(Integer id) {
     return employeeRepository.load(id);
   }
+
+  /**
+   * 従業員情報を更新する.
+   * 
+   * @param employee 従業員情報。idが一致する行が更新される。
+   */
+  public void update(Employee employee) {
+    employeeRepository.update(employee);
+  }
 }

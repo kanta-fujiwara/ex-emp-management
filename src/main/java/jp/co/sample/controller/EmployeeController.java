@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.domain.Employee;
+import jp.co.sample.form.UpdateForm;
 import jp.co.sample.service.EmployeeService;
 
 /**
@@ -60,6 +61,25 @@ public class EmployeeController {
     Employee employee = employeeService.showDetail(id);
     model.addAttribute("employee", employee);
     return "employee/detail";
+  }
+
+  /**
+   * 扶養人数を更新する.
+   * 
+   * @param form 受け取った情報
+   * @return 従業員一覧にリダイレクト
+   */
+  @RequestMapping("/update")
+  public String update(UpdateForm form) {
+    // ログイン情報の確認
+    if (session.getAttribute("administratorName") == null) {
+      return "redirect:/";
+    }
+
+    Employee employee = employeeService.showDetail(form.getId());
+    employee.setDependentsCount(form.getDependentsCount());
+    employeeService.update(employee);
+    return "redirect:/employee/showList";
   }
 
 }
