@@ -65,7 +65,7 @@ public class EmployeeController {
 
   /**
    * 扶養人数を更新する.
-   * 
+   *
    * @param form 受け取った情報
    * @return 従業員一覧にリダイレクト
    */

@@ -90,4 +90,17 @@ public class AdministratorController {
     administratorService.insert(administrator);
     return "redirect:/";
   }
+
+
+  /**
+   * ログアウトを行う.
+   *
+   * @return ログイン画面へリダイレクト
+   */
+  @RequestMapping("/logout")
+  public String logout() {
+    session.invalidate();
+    return "redirect:/";
+  }
+
 }
