@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.domain.Employee;
 import jp.co.sample.form.UpdateForm;
@@ -32,7 +34,7 @@ public class EmployeeController {
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 従業員一覧画面。ログインしていない場合はログイン画面へリダイレクト。
    */
-  @RequestMapping("/showList")
+  @GetMapping("/showList")
   public String showList(Model model) {
     // ログイン情報の確認
     if (session.getAttribute("administratorName") == null) {
@@ -51,7 +53,7 @@ public class EmployeeController {
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 従業員の詳細ページ。 ログインしていない場合はログイン画面へリダイレクト。
    */
-  @RequestMapping("/showDetail")
+  @GetMapping("/showDetail")
   public String showDetail(Integer id, Model model) {
     // ログイン情報の確認
     if (session.getAttribute("administratorName") == null) {
@@ -69,7 +71,7 @@ public class EmployeeController {
    * @param form 受け取った情報
    * @return 従業員一覧にリダイレクト
    */
-  @RequestMapping("/update")
+  @PostMapping("/update")
   public String update(UpdateForm form) {
     // ログイン情報の確認
     if (session.getAttribute("administratorName") == null) {

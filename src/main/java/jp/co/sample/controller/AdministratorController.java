@@ -5,6 +5,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
@@ -34,7 +36,7 @@ public class AdministratorController {
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者ログイン画面
    */
-  @RequestMapping("/")
+  @GetMapping("/")
   public String toLogin(Model model) {
     model.addAttribute(new LoginForm());
     model.addAttribute("isFailed", false);
@@ -48,7 +50,7 @@ public class AdministratorController {
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 従業員一覧へリダイレクト
    */
-  @RequestMapping("/login")
+  @PostMapping("/login")
   public String login(LoginForm form, Model model) {
     String mailAddress = form.getMailAddress();
     String password = form.getPassword();
@@ -71,7 +73,7 @@ public class AdministratorController {
    * @param model ビューに渡すデータを保存するオブジェクト
    * @return 管理者登録画面
    */
-  @RequestMapping("/toInsert")
+  @GetMapping("/toInsert")
   public String toInsert(Model model) {
     model.addAttribute(new InsertAdministratorForm());
     return "administrator/insert";
@@ -83,7 +85,7 @@ public class AdministratorController {
    * @param form 登録する管理者情報
    * @return 管理者ログイン画面へリダイレクト
    */
-  @RequestMapping("/insert")
+  @PostMapping("/insert")
   public String insert(InsertAdministratorForm form) {
     Administrator administrator = new Administrator();
     BeanUtils.copyProperties(form, administrator);
@@ -97,7 +99,7 @@ public class AdministratorController {
    *
    * @return ログイン画面へリダイレクト
    */
-  @RequestMapping("/logout")
+  @GetMapping("/logout")
   public String logout() {
     session.invalidate();
     return "redirect:/";
